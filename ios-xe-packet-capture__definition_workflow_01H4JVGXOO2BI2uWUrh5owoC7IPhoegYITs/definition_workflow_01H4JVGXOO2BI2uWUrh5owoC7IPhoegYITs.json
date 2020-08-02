@@ -95,7 +95,7 @@
                     "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
                     "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
                     "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
-                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Started packet cupture in the switch**"
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Started packet capture on the switch**"
                   },
                   "runtime_user": {
                     "target_default": true
@@ -143,7 +143,7 @@
                     "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
                     "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
                     "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
-                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not start packet cupture on the switch. Workflow stopped."
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not start packet capture on the switch. Workflow stopped."
                   },
                   "runtime_user": {
                     "target_default": true
@@ -259,7 +259,7 @@
                     "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
                     "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
                     "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Packet cupture saved on the switch",
-                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Packet cupture saved on the switch**"
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Packet capture saved on the switch**"
                   },
                   "runtime_user": {
                     "target_default": true
@@ -307,7 +307,7 @@
                     "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
                     "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
                     "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
-                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not stop packet cupture on the switch. Workflow stopped."
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not stop packet capture on the switch. Workflow stopped."
                   },
                   "runtime_user": {
                     "target_default": true
