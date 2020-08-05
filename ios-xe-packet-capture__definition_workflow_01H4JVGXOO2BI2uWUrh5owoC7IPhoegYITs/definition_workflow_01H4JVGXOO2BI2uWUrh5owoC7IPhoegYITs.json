@@ -5,7 +5,32 @@
     "title": "Packet Capture on Cat9K",
     "type": "generic.workflow",
     "base_type": "workflow",
-    "variables": null,
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "MGMT_IP",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01HP9AFHN2K3I4DHXnwWDFJNq5dVlKyzgY1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "PORT",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01HP9AKGQ62XJ74uJXyuTgIVs7AJ1dJl8DB",
+        "object_type": "variable_workflow"
+      }
+    ],
     "properties": {
       "atomic": {
         "is_atomic": false
@@ -26,6 +51,28 @@
     },
     "object_type": "definition_workflow",
     "actions": [
+      {
+        "unique_name": "definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR",
+        "name": "Execute Python Script",
+        "title": "Get timestamp",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get timestamp",
+          "script": "import time\ntimestamp = time.strftime(\"%Y-%m-%dT%H.%M.%S\", time.gmtime())",
+          "script_queries": [
+            {
+              "script_query": "timestamp",
+              "script_query_name": "timestamp",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
       {
         "unique_name": "definition_activity_01H4LDWGL7PUX7WoFxqNCQwyiHWXRbyonsf",
         "name": "Execute Terminal Command(s)",
@@ -199,7 +246,7 @@
         "properties": {
           "action_timeout": 360,
           "command_timeout": 120,
-          "commands": "monitor capture CAP stop\nmonitor capture CAP export bootflash:cap.pcap",
+          "commands": "monitor capture CAP stop\nmonitor capture CAP export bootflash:cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
           "continue_on_failure": false,
           "display_name": "Stop and save packet capture",
           "merge_commands": false,
@@ -212,6 +259,45 @@
             "override_workflow_target": true,
             "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
           }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HRJ6C73S40U5gZkknaldpgoQg2RwBrrre",
+        "name": "Execute Terminal Command(s)",
+        "title": "Copy to sftp server",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 360,
+          "command_timeout": 120,
+          "commands": "copy bootflash:cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap sftp://pcap:Ba365c#%@52.87.211.250/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
+          "continue_on_failure": false,
+          "display_name": "Copy to sftp server",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
+          },
+          "user_responses": [
+            {
+              "user_expect": "Address or name of remote host",
+              "user_response": "52.87.211.250"
+            },
+            {
+              "user_expect": "Destination username",
+              "user_response": "pcap"
+            },
+            {
+              "user_expect": "Destination filename",
+              "user_response": "/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap"
+            }
+          ]
         },
         "object_type": "definition_activity"
       },
@@ -259,7 +345,7 @@
                     "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
                     "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
                     "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Packet cupture saved on the switch",
-                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Packet capture saved on the switch**"
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Packet capture saved on sftp server**  \\nhttps://pcap.firejumpermission.rocks/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap"
                   },
                   "runtime_user": {
                     "target_default": true
@@ -349,7 +435,7 @@
         "properties": {
           "action_timeout": 360,
           "command_timeout": 120,
-          "commands": "no monitor capture CAP\ndelete /force cap.pcap",
+          "commands": "no monitor capture CAP\ndelete /force cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
           "continue_on_failure": false,
           "display_name": "Clearn up",
           "merge_commands": false,
@@ -357,7 +443,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "target": {
             "override_workflow_target": true,
             "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
