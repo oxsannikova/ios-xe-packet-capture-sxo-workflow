@@ -1,0 +1,1162 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2",
+    "name": "Run Packet Capture",
+    "title": "Run Packet Capture",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_type",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01HP8TDMMYZBV6MWaU7nakMpNXx1NhzoiRv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01HP8T8H012UP1hOPqRG9q8YQGcJXIU49RW",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Supported observable type: IP Address",
+      "display_name": "Run Packet Capture",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01HP8Z9458OVJ1FmmfkxKOUNeSKwdzxFJW1",
+        "name": "Condition Block",
+        "title": "IP Address Provided?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "IP Address Provided?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01HP8Z99W3W5C0feztcBrQGNwHQz9QBTPa8",
+            "name": "Condition Branch",
+            "title": "Yes",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2.input.variable_workflow_01HP8TDMMYZBV6MWaU7nakMpNXx1NhzoiRv$",
+                "operator": "eq",
+                "right_operand": "ip"
+              },
+              "continue_on_failure": false,
+              "display_name": "Yes",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01HP900JY1EGC2uwwHtrlD7gzlYUOAX5aWK",
+                "name": "Webex Teams - Post Message to Room",
+                "title": "Webex Teams - Post Message to Room",
+                "type": "workflow.atomic_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Webex Teams - Post Message to Room",
+                  "input": {
+                    "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                    "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                    "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "",
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Received IP Address Observable:** $workflow.definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2.input.variable_workflow_01HP8T8H012UP1hOPqRG9q8YQGcJXIU49RW$  \\nReaching to ISE to obtain session information details..."
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                    "target_type": "web-service.endpoint"
+                  },
+                  "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6",
+                "name": "Get ISE Active Session",
+                "title": "Get ISE Active Session",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Get ISE Active Session",
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01HP8V7I81DBC3aoNlMWJWFnshEY2f6sZSH",
+                "name": "Webex Teams - Post Message to Room",
+                "title": "Webex Teams - Post Message to Room",
+                "type": "workflow.atomic_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Webex Teams - Post Message to Room",
+                  "input": {
+                    "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                    "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                    "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "",
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Obtained session information from ISE.**  \\nUsername: $activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8OT3GHZT92ofAIdolZr2FpqAUFNNdGa$  \\nMAC Address: $activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8PO910AXI16JDKDT6fmUKOQQ0LEiLGb$  \\nNetwork Access Device IP Address: $activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8P1IP3GP34SlvBjhb3P5Xs3H0aBPFZ4$  \\nNetwork Access Device Port: $activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8PFVFMHLH6l2FgQAZrG35qflTCnaIWW$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                    "target_type": "web-service.endpoint"
+                  },
+                  "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01HP8XHGF7LOB72dQOtJ2fkTJp7qHNzW2gG",
+                "name": "Packet Capture on Cat9K",
+                "title": "Packet Capture on Cat9K",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Packet Capture on Cat9K",
+                  "input": {
+                    "variable_workflow_01HP9AFHN2K3I4DHXnwWDFJNq5dVlKyzgY1": "$activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8P1IP3GP34SlvBjhb3P5Xs3H0aBPFZ4$",
+                    "variable_workflow_01HP9AKGQ62XJ74uJXyuTgIVs7AJ1dJl8DB": "$activity.definition_activity_01HP8UVR4U9KZ31votnSJSrBbCF6eECOZM6.output.variable_workflow_01HP8PFVFMHLH6l2FgQAZrG35qflTCnaIWW$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01H4JVGXOO2BI2uWUrh5owoC7IPhoegYITs"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01HP8Z9B2UUE44I78fIjrG4ouBUalCicWKo",
+            "name": "Condition Branch",
+            "title": "No",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2.input.variable_workflow_01HP8TDMMYZBV6MWaU7nakMpNXx1NhzoiRv$",
+                "operator": "ne",
+                "right_operand": "ip"
+              },
+              "continue_on_failure": false,
+              "display_name": "No",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01HP91XR26WCD7mts021GrDdOeSmyhnNuIX",
+                "name": "Webex Teams - Post Message to Room",
+                "title": "Webex Teams - Post Message to Room",
+                "type": "workflow.atomic_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Webex Teams - Post Message to Room",
+                  "input": {
+                    "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                    "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                    "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "",
+                    "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Wrong observable type. Please provide IP address."
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                    "target_type": "web-service.endpoint"
+                  },
+                  "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01HRE7G2Z48EZ3PfXJbjnOm6TiTrRlMilui",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "result_message": "The information provided is in the wrong format.\nObservable type: $workflow.definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2.input.variable_workflow_01HP8TDMMYZBV6MWaU7nakMpNXx1NhzoiRv$\nObservable value: $workflow.definition_workflow_01HP8SN3HU0493r38yV9e9C6LCWGL9qBDi2.input.variable_workflow_01HP8T8H012UP1hOPqRG9q8YQGcJXIU49RW$\nYou have to provide ip address as input.\n$env.variable_01A6C871LSO9A26D0zcBjJoAKgRglrC10aG.env.variable_01A6C871LSO9A26D0zcBjJoAKgRglrC10aG$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m"
+    ]
+  },
+  "categories": {
+    "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m": {
+      "unique_name": "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "name": "response",
+      "title": "response",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP": {
+      "unique_name": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+      "name": "Webex_Teams_Target",
+      "title": "Webex_Teams_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "Webex_Teams_Target",
+        "host": "webexapis.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01H4J9XDWG3L12aWjxNObgTuyuRJLvBD78u": {
+      "unique_name": "definition_target_01H4J9XDWG3L12aWjxNObgTuyuRJLvBD78u",
+      "name": "ISE_ERS_Target",
+      "title": "ISE_ERS_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01H4J98JQ8N4M23Ai2CqO68WZC1rfCbkPnY",
+        "description": "Jeff's Lab",
+        "disable_certificate_validation": true,
+        "display_name": "ISE_ERS_Target",
+        "host": "70.91.233.131",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 9060,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS": {
+      "unique_name": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS",
+      "name": "IOS XE",
+      "title": "IOS XE",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01H4JZJCU50QD0BSUSaUWBg1hAIJ5bWChXF",
+        "display_name": "IOS XE",
+        "host": "ios-xe-mgmt-latest.cisco.com",
+        "port": 8181,
+        "protocol": "ssh"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01H4J98JQ8N4M23Ai2CqO68WZC1rfCbkPnY": {
+      "unique_name": "definition_runtime_user_01H4J98JQ8N4M23Ai2CqO68WZC1rfCbkPnY",
+      "name": "ISE Account Keys",
+      "title": "ISE Account Keys",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "ISE Account Keys"
+      }
+    },
+    "definition_runtime_user_01H4JZJCU50QD0BSUSaUWBg1hAIJ5bWChXF": {
+      "unique_name": "definition_runtime_user_01H4JZJCU50QD0BSUSaUWBg1hAIJ5bWChXF",
+      "name": "IOS XE",
+      "title": "IOS XE",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "IOS XE",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ": {
+      "unique_name": "variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ",
+      "properties": {
+        "value": "Y2lzY29zcGFyazovL3VzL1JPT00vYWIxZWRiYzAtYWE4NS0xMWVhLTllNjYtMWQyNWJiODAwMWZk",
+        "scope": "global",
+        "name": "Webex Teams Room",
+        "type": "datatype.string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM": {
+      "unique_name": "variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Webex Teams Bot Token",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn",
+        "name": "ISE Workflow",
+        "title": "ISE Workflow",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "NAD_IP",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HP8P1IP3GP34SlvBjhb3P5Xs3H0aBPFZ4",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "NAD_PORT",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HP8PFVFMHLH6l2FgQAZrG35qflTCnaIWW",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "MAC",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HP8PO910AXI16JDKDT6fmUKOQQ0LEiLGb",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?\u003e\n\u003csessionParameters\u003e\n    \u003cpassed xsi:type=\"xs:boolean\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003etrue\u003c/passed\u003e\n    \u003cfailed xsi:type=\"xs:boolean\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003efalse\u003c/failed\u003e\n    \u003cuser_name\u003ejanedoe\u003c/user_name\u003e\n    \u003cnas_ip_address\u003e192.168.48.132\u003c/nas_ip_address\u003e\n    \u003ccalling_station_id\u003e18:65:71:A0:A8:29\u003c/calling_station_id\u003e\n    \u003corig_calling_station_id\u003e18-65-71-A0-A8-29\u003c/orig_calling_station_id\u003e\n    \u003ccpmsession_id\u003eC0A83084000000331C5239D5\u003c/cpmsession_id\u003e\n    \u003cdestination_ip_address\u003e192.168.48.20\u003c/destination_ip_address\u003e\n    \u003cdevice_ip_address\u003e192.168.48.132\u003c/device_ip_address\u003e\n    \u003cidentity_group\u003eApple-Mac-OS-X\u003c/identity_group\u003e\n    \u003cnetwork_device_name\u003ec2960c-2\u003c/network_device_name\u003e\n    \u003cacs_server\u003eise1\u003c/acs_server\u003e\n    \u003cauthentication_method\u003edot1x\u003c/authentication_method\u003e\n    \u003cauthentication_protocol\u003ePEAP (EAP-MSCHAPv2)\u003c/authentication_protocol\u003e\n    \u003cframed_ip_address\u003e192.168.50.142\u003c/framed_ip_address\u003e\n    \u003cauth_acs_timestamp\u003e2020-07-29T12:10:19.907-04:00\u003c/auth_acs_timestamp\u003e\n    \u003cexecution_steps\u003e11001,11017,15049,15008,15048,11507,12500,12625,11006,11001,11018,12301,12300,12625,11006,11001,11018,12302,12319,12800,12805,12806,12807,12808,12810,12811,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12305,11006,11001,11018,12304,12319,12812,12813,12804,12801,12802,12816,12310,12305,11006,11001,11018,12304,12313,11521,12305,11006,11001,11018,12304,11522,11806,12305,11006,11001,11018,12304,11808,15041,22072,15013,24210,24216,15013,24430,24325,24313,24319,24323,24343,24402,22037,11824,12305,11006,11001,11018,12304,11810,11814,11519,12314,12305,11006,11001,11018,12304,24715,15036,24209,24211,11055,15048,15048,15048,15048,15048,15048,15048,15048,15048,15048,15016,22081,22080,12306,11503,24432,24325,24313,24319,24323,24355,24416,11002\u003c/execution_steps\u003e\n    \u003cresponse\u003e{Class=CACS:C0A83084000000331C5239D5:ise1/385285940/480150; EAP-Key-Name=19:5f:21:9f:6b:63:9c:8d:54:26:9c:96:84:48:ff:e6:35:2f:b7:52:a8:17:f8:0a:69:42:a6:a1:bf:c4:f6:ae:ab:6b:32:9c:70:e9:ac:fc:aa:5e:96:25:03:83:e3:a3:11:55:a4:70:fc:da:3b:09:7e:a6:be:b7:27:3c:b5:b2:17; cisco-av-pair=cts:security-group-tag=0004-00; MS-MPPE-Send-Key=****; MS-MPPE-Recv-Key=****; LicenseTypes=1; }\u003c/response\u003e\n    \u003caudit_session_id\u003eC0A83084000000331C5239D5\u003c/audit_session_id\u003e\n    \u003cnas_port_id\u003eFastEthernet0/5\u003c/nas_port_id\u003e\n    \u003cposture_status\u003eNotApplicable\u003c/posture_status\u003e\n    \u003cselected_azn_profiles\u003eEmployees\u003c/selected_azn_profiles\u003e\n    \u003cservice_type\u003eFramed\u003c/service_type\u003e\n    \u003cmessage_code\u003e5200\u003c/message_code\u003e\n    \u003cauth_acsview_timestamp\u003e2020-07-29T12:10:19.907-04:00\u003c/auth_acsview_timestamp\u003e\n    \u003cauth_id\u003e1595911186511480\u003c/auth_id\u003e\n    \u003cidentity_store\u003einfosec-pros.com\u003c/identity_store\u003e\n    \u003ccts_security_group\u003eEmployees\u003c/cts_security_group\u003e\n    \u003clocation\u003eAll Locations#Home\u003c/location\u003e\n    \u003cdevice_type\u003eAll Device Types#Wired Devices\u003c/device_type\u003e\n    \u003cresponse_time\u003e83\u003c/response_time\u003e\n    \u003cother_attr_string\u003e:!:ConfigVersionId=78:!:DestinationPort=1645:!:Protocol=Radius:!:NAS-Port=50105:!:Framed-MTU=1500:!:State=37CPMSessionID=C0A83084000000331C5239D5;31SessionID=ise1/385285940/480150;:!:EAP-Key-Name=:!:NetworkDeviceProfileId=b0699505-3150-4215-a80e-6753d45bf56c:!:IsThirdPartyDeviceFlow=false:!:AcsSessionID=ise1/385285940/480150:!:SelectedAuthenticationIdentityStores=Internal Users:!:SelectedAuthenticationIdentityStores=All_AD_Join_Points:!:SelectedAuthenticationIdentityStores=Guest Users:!:AuthenticationStatus=AuthenticationPassed:!:IdentityPolicyMatchedRule=Dot1X:!:AuthorizationPolicyMatchedRule=Basic_Authenticated_Access:!:EndPointMACAddress=18-65-71-A0-A8-29:!:ISEPolicySetName=Default:!:IdentitySelectionMatchedRule=Dot1X:!:AD-User-Resolved-Identities=jfanelli@infosec-pros.com:!:AD-User-Candidate-Identities=jfanelli@infosec-pros.com:!:AD-User-Join-Point=INFOSEC-PROS.COM:!:AD-User-Resolved-DNs=CN=Jeff Fanelli,CN=Users,DC=infosec-pros,DC=com:!:AD-User-DNS-Domain=infosec-pros.com:!:AD-User-NetBios-Name=INFOSEC-PROS:!:IsMachineIdentity=false:!:UserAccountControl=66048:!:AD-User-SamAccount-Name=jfanelli:!:AD-User-Qualified-Name=jfanelli@infosec-pros.com:!:TLSCipher=ECDHE-RSA-AES256-SHA:!:TLSVersion=TLSv1:!:DTLSSupport=Unknown:!:HostIdentityGroup=Endpoint Identity Groups:Profiled:Apple-Mac-OS-X:!:Model Name=WS-C2960PD-8TT-L:!:Software Version=15.02SE10a:!:Network Device Profile=Cisco:!:Location=Location#All Locations#Home:!:Device Type=Device Type#All Device Types#Wired Devices:!:IPSEC=IPSEC#Is IPSEC Device#No:!:EndPointPolicy=ae666910-8010-11e9-90b8-525ba2080db0:!:EndPointPolicy=b1428630-7f7c-11e9-90b8-525ba2080db0:!:Name=Endpoint Identity Groups:Profiled:Apple-Mac-OS-X:!:ExternalGroups=S-1-5-21-4136123548-156980807-1936532411-513:!:ExternalGroups=S-1-5-21-4136123548-156980807-1936532411-512:!:IdentityAccessRestricted=false:!:StepData=\"4= DEVICE.Device Type\",\"90=All_User_ID_Stores\",\"91=Internal Users\",\"94=All_AD_Join_Points\",\"95=All_AD_Join_Points\",\"96=jfanelli\",\"97=infosec-pros.com\",\"98=infosec-pros.com\",\"100=jfanelli@infosec-pros.com\",\"101=All_AD_Join_Points\",\"123= Session.EPSStatus\",\"124= Session.ANCPolicy\",\"125= DEVICE.Device Type\",\"126= Radius.NAS-Port-Type\",\"127= EndPoints.LogicalProfile\",\"128= Network Access.AuthenticationStatus\",\"129= Session.PostureStatus\",\"130= Network Access.EapAuthentication\",\"131= Normalised Radius.RadiusFlowType\",\"132= EndPoints.EndPointPolicy\",\"138=infosec-pros.com\",\"139=jfanelli\",\"140=infosec-pros.com\",\"141=infosec-pros.com\",\"143=infosec-pros.com\",\"144=infosec-pros.com\"=StepData:!:RADIUS Username=jfanelli:!:Device IP Address=192.168.48.132:!:CPMSessionID=C0A83084000000331C5239D5:!:Called-Station-ID=A0:CF:5B:35:17:85:!:CiscoAVPair=service-type=Framed,audit-session-id=C0A83084000000331C5239D5,method=dot1x\u003c/other_attr_string\u003e\n    \u003cacct_id\u003e1595911186511486\u003c/acct_id\u003e\n    \u003cacct_acs_timestamp\u003e2020-07-29T12:10:20.259-04:00\u003c/acct_acs_timestamp\u003e\n    \u003cacct_acsview_timestamp\u003e2020-07-29T12:10:20.259-04:00\u003c/acct_acsview_timestamp\u003e\n    \u003cacct_session_id\u003e0000002D\u003c/acct_session_id\u003e\n    \u003cacct_status_type\u003eStart\u003c/acct_status_type\u003e\n    \u003cacct_input_octets\u003e839146500\u003c/acct_input_octets\u003e\n    \u003cacct_output_octets\u003e1552257177\u003c/acct_output_octets\u003e\n    \u003cacct_input_packets\u003e1032960\u003c/acct_input_packets\u003e\n    \u003cacct_output_packets\u003e8021190\u003c/acct_output_packets\u003e\n    \u003cacct_delay_time\u003e0\u003c/acct_delay_time\u003e\n    \u003cevent_timestamp\u003e1596039020\u003c/event_timestamp\u003e\n    \u003cstarted xsi:type=\"xs:boolean\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003etrue\u003c/started\u003e\n    \u003cstopped xsi:type=\"xs:boolean\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003efalse\u003c/stopped\u003e\n    \u003cendpoint_policy\u003eMac-OS_X-Workstation\u003c/endpoint_policy\u003e\n\u003c/sessionParameters\u003e",
+              "scope": "local",
+              "name": "session_details",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HP7SAY11Y4J59bAPgBYFA4PAHAecJOzaQ",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "USERNAME",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HP8OT3GHZT92ofAIdolZr2FpqAUFNNdGa",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "ISE Workflow",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "no_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01H4J8KRUWOM331XUpZ7vEwk9ARfSvVU4LV",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "accept": "application/json",
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "HTTP Request",
+              "method": "GET",
+              "relative_url": "/ers/sdk",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4J9XDWG3L12aWjxNObgTuyuRJLvBD78u"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HP7SWKWAPF61Ppmf6uXdwZN4OzqPeQEGN",
+            "name": "Convert Xml to Json",
+            "title": "Convert Xml to Json",
+            "type": "core.xml2json",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Convert Xml to Json",
+              "input_xml": "$workflow.definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn.local.variable_workflow_01HP7SAY11Y4J59bAPgBYFA4PAHAecJOzaQ$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HP7TDZDZ1E77IbXIqzq0MTw0Nrqb5DNbA",
+            "name": "Parallel Block",
+            "title": "Parallel Block",
+            "type": "logic.parallel",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Parallel Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01HP7TE39YEKT3A5GbSPUjBPdDoZ6gYcZmi",
+                "name": "Parallel Branch",
+                "title": "Parallel Branch",
+                "type": "logic.parallel_block",
+                "base_type": "activity",
+                "properties": {
+                  "display_name": "Parallel Branch"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01HP7TIBJT6OY6a2BnsAjaz1UvDnkNo1r01",
+                    "name": "JSONPath Query",
+                    "title": "Get Username",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get Username",
+                      "input_json": "$activity.definition_activity_01HP7SWKWAPF61Ppmf6uXdwZN4OzqPeQEGN.output.output_json$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$..user_name",
+                          "jsonpath_query_name": "username",
+                          "jsonpath_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01HP7TE4GVCVO11THL3FHwUtPswzR7RaqnH",
+                "name": "Parallel Branch",
+                "title": "Parallel Branch",
+                "type": "logic.parallel_block",
+                "base_type": "activity",
+                "properties": {
+                  "display_name": "Parallel Branch"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01HP7VOVEY4S76hzTh6ZeLOYENRmtysLAWH",
+                    "name": "JSONPath Query",
+                    "title": "Get NAD IP",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get NAD IP",
+                      "input_json": "$activity.definition_activity_01HP7SWKWAPF61Ppmf6uXdwZN4OzqPeQEGN.output.output_json$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$..nas_ip_address",
+                          "jsonpath_query_name": "nas_ip_address",
+                          "jsonpath_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01HP7WWP2Q4Y56J9JaHzswebzVW23u6SSCV",
+                "name": "Parallel Branch",
+                "title": "Parallel Branch",
+                "type": "logic.parallel_block",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Parallel Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01HP7WWQVLKZI099f1WLMOy5pQmG744EZDo",
+                    "name": "JSONPath Query",
+                    "title": "Get MAC ADDRESS",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get MAC ADDRESS",
+                      "input_json": "$activity.definition_activity_01HP7SWKWAPF61Ppmf6uXdwZN4OzqPeQEGN.output.output_json$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$..calling_station_id",
+                          "jsonpath_query_name": "nas_mac_address",
+                          "jsonpath_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01HP8L0HXKA5W0AVO12xBfP3DhKrcynzQEH",
+                "name": "Parallel Branch",
+                "title": "Parallel Branch",
+                "type": "logic.parallel_block",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Parallel Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01HP8L0L2J3OW39WiHwxtO6wOdy1BSnzOcC",
+                    "name": "JSONPath Query",
+                    "title": "Get PORT",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get PORT",
+                      "input_json": "$activity.definition_activity_01HP7SWKWAPF61Ppmf6uXdwZN4OzqPeQEGN.output.output_json$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$..nas_port_id",
+                          "jsonpath_query_name": "nas_port_id",
+                          "jsonpath_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01HP8OL17SQHQ5lAY6Dl0RRPqVJreKnWblE",
+            "name": "Set Variables",
+            "title": "Set Output Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Output Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn.output.variable_workflow_01HP8OT3GHZT92ofAIdolZr2FpqAUFNNdGa$",
+                  "variable_value_new": "$activity.definition_activity_01HP7TIBJT6OY6a2BnsAjaz1UvDnkNo1r01.output.jsonpath_queries.username$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn.output.variable_workflow_01HP8PO910AXI16JDKDT6fmUKOQQ0LEiLGb$",
+                  "variable_value_new": "$activity.definition_activity_01HP7WWQVLKZI099f1WLMOy5pQmG744EZDo.output.jsonpath_queries.nas_mac_address$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn.output.variable_workflow_01HP8P1IP3GP34SlvBjhb3P5Xs3H0aBPFZ4$",
+                  "variable_value_new": "$activity.definition_activity_01HP7VOVEY4S76hzTh6ZeLOYENRmtysLAWH.output.jsonpath_queries.nas_ip_address$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4DZGD7IFJO5XHOVeAgIGKC2WFGN334Bn.output.variable_workflow_01HP8PFVFMHLH6l2FgQAZrG35qflTCnaIWW$",
+                  "variable_value_new": "$activity.definition_activity_01HP8L0L2J3OW39WiHwxtO6wOdy1BSnzOcC.output.jsonpath_queries.nas_port_id$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H4JVGXOO2BI2uWUrh5owoC7IPhoegYITs",
+        "name": "Packet Capture on Cat9K",
+        "title": "Packet Capture on Cat9K",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "MGMT_IP",
+              "type": "datatype.string",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01HP9AFHN2K3I4DHXnwWDFJNq5dVlKyzgY1",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "PORT",
+              "type": "datatype.string",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01HP9AKGQ62XJ74uJXyuTgIVs7AJ1dJl8DB",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Packet Capture on Cat9K",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR",
+            "name": "Execute Python Script",
+            "title": "Get timestamp",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Get timestamp",
+              "script": "import time\ntimestamp = time.strftime(\"%Y-%m-%dT%H.%M.%S\", time.gmtime())",
+              "script_queries": [
+                {
+                  "script_query": "timestamp",
+                  "script_query_name": "timestamp",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H4LDWGL7PUX7WoFxqNCQwyiHWXRbyonsf",
+            "name": "Execute Terminal Command(s)",
+            "title": "Start packet cupture ",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 360,
+              "command_timeout": 120,
+              "commands": "monitor capture CAP interface GigabitEthernet1 both\nmonitor capture CAP match ipv4 protocol tcp any any\nmonitor capture CAP start",
+              "continue_on_failure": false,
+              "display_name": "Start packet cupture ",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H59AB4CQF2M51SzvjSlTPAAU5jAClDiVG",
+            "name": "Condition Block",
+            "title": "If Success",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "If Success",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01H59AB9Q6VEB4Yfta1C4PthMROYnZR76fA",
+                "name": "Condition Branch",
+                "title": "Yes",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H4LDWGL7PUX7WoFxqNCQwyiHWXRbyonsf.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Yes",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H598KYT8A955ftgfMR5P6dHqGtJT1PaNz",
+                    "name": "Webex Teams - Post Message to Room",
+                    "title": "Webex Teams - Post Message to Room",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Webex Teams - Post Message to Room",
+                      "input": {
+                        "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                        "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                        "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
+                        "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Started packet capture on the switch**"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01H59ABB5OANB4B7btWuZTK9ZW9D5lyEXy1",
+                "name": "Condition Branch",
+                "title": "No",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H4LDWGL7PUX7WoFxqNCQwyiHWXRbyonsf.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": false
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "No",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H59ATFR58KY4RtTZQsVMsGeoSDWElOCQF",
+                    "name": "Webex Teams - Post Message to Room",
+                    "title": "Webex Teams - Post Message to Room",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Webex Teams - Post Message to Room",
+                      "input": {
+                        "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                        "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                        "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
+                        "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not start packet capture on the switch. Workflow stopped."
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01H59BTEMF59W62UcsHWtRDFZEAzaEd69uw",
+                    "name": "Completed",
+                    "title": "Completed",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "continue_on_failure": false,
+                      "display_name": "Completed",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01H5980IFIEPA5tydgzGLMTgq8C5P6SFYwn",
+            "name": "Sleep",
+            "title": "Sleep",
+            "type": "core.sleep",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Sleep",
+              "skip_execution": false,
+              "sleep_interval": 2
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H5986RR5FCP2Eg1YvxqDXlppcRe1piaMk",
+            "name": "Execute Terminal Command(s)",
+            "title": "Stop and save packet capture",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 360,
+              "command_timeout": 120,
+              "commands": "monitor capture CAP stop\nmonitor capture CAP export bootflash:cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
+              "continue_on_failure": false,
+              "display_name": "Stop and save packet capture",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HRJ6C73S40U5gZkknaldpgoQg2RwBrrre",
+            "name": "Execute Terminal Command(s)",
+            "title": "Copy to sftp server",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 360,
+              "command_timeout": 120,
+              "commands": "copy bootflash:cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap sftp://pcap:Ba365c#%@52.87.211.250/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
+              "continue_on_failure": false,
+              "display_name": "Copy to sftp server",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
+              },
+              "user_responses": [
+                {
+                  "user_expect": "Address or name of remote host",
+                  "user_response": "52.87.211.250"
+                },
+                {
+                  "user_expect": "Destination username",
+                  "user_response": "pcap"
+                },
+                {
+                  "user_expect": "Destination filename",
+                  "user_response": "/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H59CD7QVZT41Tieqdwupe1Hxs63yV209u",
+            "name": "Condition Block",
+            "title": "If Success",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "If Success",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01H59CDDBB64627UAk2FkAN7QvY24SxgZ23",
+                "name": "Condition Branch",
+                "title": "Yes",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H5986RR5FCP2Eg1YvxqDXlppcRe1piaMk.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Yes",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H599XTJR50M0HCUxFugZJiP1BwCnsC4jG",
+                    "name": "Webex Teams - Post Message to Room",
+                    "title": "Webex Teams - Post Message to Room",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Webex Teams - Post Message to Room",
+                      "input": {
+                        "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                        "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                        "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Packet cupture saved on the switch",
+                        "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "**Packet capture saved on sftp server**  \\nhttps://pcap.firejumpermission.rocks/pcap/cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01H59CDELZKWC5UZcd2wnN4Tr9uerCQ7b96",
+                "name": "Condition Branch",
+                "title": "No",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H5986RR5FCP2Eg1YvxqDXlppcRe1piaMk.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": "false"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "No",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H59CXY44GCW2KtIB6307lHa0YtbNm1F1q",
+                    "name": "Webex Teams - Post Message to Room",
+                    "title": "Webex Teams - Post Message to Room",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Webex Teams - Post Message to Room",
+                      "input": {
+                        "variable_workflow_01FGYY44G3MZ55amJu9YqgUeKS8GT49bZx3": "$global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM.global.variable_01H0BNK7MLU3M6Bcnlz5qZqYbUrp2zVjnTM$",
+                        "variable_workflow_01FGYY44G3TK951Crpnd8g2izonyM4bFtpW": "$global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ.global.variable_01FWYK9T5GX1E4yrobIXcHqttD01BtOWBQQ$",
+                        "variable_workflow_01FGYY44G3UPV3heGGc3vXCV47YL5WoI2X6": "Started packet cupture in the switch",
+                        "variable_workflow_01FGYZ9BV4QTP19CuMwcW8QywvCP9ymx2BZ": "Could not stop packet capture on the switch. Workflow stopped."
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GFV0RAKXT9C0NR8TSTvDT875Nkj2e0AVP",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01H59DELKXQAO1HxeIcQMfHCIOOmMoIiZcu",
+                    "name": "Completed",
+                    "title": "Completed",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "continue_on_failure": false,
+                      "display_name": "Completed",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01H59PY3YKQ292hn8jUr3w7N4tMRCHQkKK9",
+            "name": "Execute Terminal Command(s)",
+            "title": "Clearn up",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 360,
+              "command_timeout": 120,
+              "commands": "no monitor capture CAP\ndelete /force cap-$activity.definition_activity_01HP9LLRXO0SA3jA0u6JJfhytpJ0RX6sTcR.output.script_queries.timestamp$.pcap",
+              "continue_on_failure": false,
+              "display_name": "Clearn up",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4LDHWVAWMR6BcP6D6eojBz3Tqdom0FAS"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ],
+  "atomic_workflows": [
+    "definition_workflow_01FGYY44YU521254ygN3Le0In0kEHpiPNpf"
+  ]
+}
